@@ -8,9 +8,9 @@ import time
 
 
 
-visualize = False
+visualize = True
 _2D = False
-use_cuda = False and not visualize
+use_cuda = False #and not visualize
 
 offset = np.array([-46,-47,0]).reshape(1,3) if not _2D else np.array([-(46-4),-(47)]).reshape(1,2)#
 

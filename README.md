@@ -1,4 +1,4 @@
-# deep_loco
+# DeepLoco
 
 A sample implementation of [deeploco](https://www.biorxiv.org/content/early/2018/02/16/267096).
 
@@ -14,3 +14,20 @@ as well as the generative model settings (in train_script.py). You might also ne
 the learning rate schedule of the network.
 
 localize.py gives an example of how to use a pretrained network to do localization.
+
+## Installation
+
+1. Create a new conda environment and activate it
+
+```
+conda create -n deeploco python=3.6
+conda activate deeploco
+```
+
+2. Install pytorch, scipy and matplotlib
+
+```
+conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+conda install -c anaconda scipy
+conda install -c conda-forge matplotlib
+```
