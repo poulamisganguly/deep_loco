@@ -24,8 +24,8 @@ if _2D:
 kernel_sigmas = [64.0, 320.0, 640.0, 1920.0]
 
 #
-use_cuda = False
-warmstart = True
+use_cuda = True
+warmstart = False
 
 # Construct a generative model
 p = prior.UniformCardinalityPrior([0,0,-750], [6400,6400,750], 1000.0, 7000.0, 5)
@@ -88,7 +88,7 @@ for stepsize, iters in lr_schedule:
         # Compute eval
         (o_theta_e, o_w_e) = net(e_images)
         e_loss = loss_fn(o_theta_e, o_w_e, e_theta,e_weights)
-        print("\teval", e_loss.data[0])
+        print("\teval", e_loss.data)
 
         s_time = time.time()
         for batch_idx in range(iters_per_eval):
