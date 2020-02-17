@@ -5,10 +5,11 @@ from PIL import Image
 import glob
 import numpy as np
 import time
+from matplotlib import pyplot as plt
 
 
 
-visualize = True
+visualize = False
 _2D = False
 use_cuda = False #and not visualize
 
@@ -23,7 +24,7 @@ IMAGE_REGEX = './data/test_frames/*.tif'
 ACTIVATIONS_CSV = './data/activations.csv'
 ACTIVATIONS = np.recfromcsv(ACTIVATIONS_CSV)
 ACTIVATIONS.sort(order="frame")
-N_TEST_FRAMES = 64#64 if visualize else 19996
+N_TEST_FRAMES = 65#64 if visualize else 19996
 def chunks(l, n):
     for i in range(0, len(l), n):
         yield l[i:i+n]
@@ -79,9 +80,11 @@ if not visualize:
 else:
     import pylab
     pylab.ion()
-    for img_idx in range(64):
-        pylab.figure()
-        pylab.imshow(real_images[img_idx], extent=(0,6400,6400,0))
-        pylab.scatter(points[img_idx][:,0], points[img_idx][:,1], marker='x',color="red",s = (weights[img_idx])*100.0) #,s = o_w[b_idx,:].data.cpu()*100.0)
+    for img_idx in range(0,64,2):
+        plt.figure()
+        plt.imshow(real_images[img_idx], extent=(0,6400,6400,0))
+        plt.scatter(points[img_idx][:,0], points[img_idx][:,1], marker='x',color="red",s = (weights[img_idx])*100.0) #,s = o_w[b_idx,:].data.cpu()*100.0)
         if len( FRAME_ACTIVATIONS[img_idx])> 0:
-            pylab.scatter(FRAME_ACTIVATIONS[img_idx][:,0], FRAME_ACTIVATIONS[img_idx][:,1], marker='o',color="white",facecolor="none") #,s = o_w[b_idx,:].data.cpu()*100.0)
+            plt.scatter(FRAME_ACTIVATIONS[img_idx][:,0], FRAME_ACTIVATIONS[img_idx][:,1], marker='o',color="white",facecolor="none") #,s = o_w[b_idx,:].data.cpu()*100.0)
+        plt.savefig('fig.png', format='png')
+        
